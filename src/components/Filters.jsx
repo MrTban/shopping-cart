@@ -3,25 +3,25 @@ import { useState } from 'react'
 export function Filters({ onChange }) {
 	const [minPrice, setMinPrice] = useState(0)
 
-	const handleChangeMinPrice = (e) => {
-		setMinPrice(e.target.value)
+	const handleChangeMinPrice = (event) => {
+		setMinPrice(event.target.value)
 		onChange((prevState) => ({
 			...prevState,
-			minPrice: e.target.value,
+			minPrice: event.target.value,
 		}))
 	}
 
-	const handleChangeCategory = (e) => {
+	const handleChangeCategory = (event) => {
 		onChange((prevState) => ({
 			...prevState,
-			category: e.target.value,
+			category: event.target.value,
 		}))
 	}
 
 	return (
-		<section className='flex flex-col gap-4 md:flex-row items-center justify-between text-sm font-bold mb-4'>
+		<section className='flex flex-col gap-4 sm:flex-row items-center justify-between text-sm font-bold mb-4'>
 			<div className='flex gap-4'>
-				<label htmlFor='price'>Price starting at</label>
+				<label htmlFor='price'>Price starting at:</label>
 				<input
 					type='range'
 					id='price'
@@ -37,7 +37,7 @@ export function Filters({ onChange }) {
 				<select id='category' onChange={handleChangeCategory}>
 					<option value='all'>All</option>
 					<option value='laptops'>Laptops</option>
-					<option value='smartphones'>Smatphones</option>
+					<option value='smartphones'>Smartphones</option>
 				</select>
 			</div>
 		</section>

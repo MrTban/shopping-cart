@@ -1,6 +1,8 @@
 import { IS_DEVELOPMENT } from '../config'
+import { useFilters } from '../hooks/useFilters'
 
-export function Footer({ filters }) {
+export function Footer() {
+	const { filters } = useFilters()
 	return (
 		<footer className='fixed left-4 bottom-4 text-left bg-black/70 px-2 py-6 rounded-3xl opacity-95 backdrop-blur'>
 			{IS_DEVELOPMENT ? (

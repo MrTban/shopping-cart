@@ -30,7 +30,7 @@ export function Cart() {
 		<>
 			<label
 				htmlFor={cartCheckboxId}
-				className='cart-button flex items-center justify-center bg-[#09f] rounded-full h-8 cursor-pointer p-1 absolute right-2 top-2 transition-[all .3 ease] z-[9999] w-8 hover:scale-110'
+				className='fixed cart-button flex items-center justify-center bg-[#09f] rounded-full h-8 cursor-pointer p-1  right-2 top-2 transition-[all .3 ease] z-[9999] w-8 hover:scale-110'
 			>
 				<CartIcon />
 			</label>

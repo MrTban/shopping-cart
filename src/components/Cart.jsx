@@ -1,38 +1,53 @@
+import './cart.css'
+
 import { useId } from 'react'
-import { CartIcon, ClearCartIcon, RemoveFromCartIcon } from './Icons'
+import { CartIcon, ClearCartIcon } from './Icons.jsx'
+import { useCart } from '../hooks/useCart.js'
+
+function CartItem({ thumbnail, price, title, quantity, addToCart }) {
+	return (
+		<li className='border-b border-solid border-[#444]'>
+			<img src={thumbnail} alt={title} className='aspect-video w-full' />
+			<div>
+				<strong>{title}</strong> - ${price * quantity}
+			</div>
+
+			<footer className='flex gap-2 justify-center items-center'>
+				<small>Qty: {quantity}</small>
+				<button className='p-2' onClick={addToCart}>
+					+
+				</button>
+			</footer>
+		</li>
+	)
+}
 
 export function Cart() {
 	const cartCheckboxId = useId()
+	const { cart, clearCart, addToCart } = useCart()
 
 	return (
 		<>
 			<label
 				htmlFor={cartCheckboxId}
-				className='flex items-center justify-center bg-[#09f] h-8 cursor-pointer p-1 absolute right-2 top-2 transition-[all .3 ease] z-[9999] w-8'
+				className='cart-button flex items-center justify-center bg-[#09f] rounded-full h-8 cursor-pointer p-1 absolute right-2 top-2 transition-[all .3 ease] z-[9999] w-8 hover:scale-110'
 			>
 				<CartIcon />
 			</label>
-			<input type='checkbox' hidden id={cartCheckboxId} />
+			<input id={cartCheckboxId} type='checkbox' hidden />
 
-			<aside className='hidden bg-black p-8 fixed right-0 top-0 w-[200px]'>
+			<aside className='cart hidden bg-black p-8 fixed right-0 top-0 w-[200px]'>
 				<ul>
-					<li className='border-b border-solid border-[#444]'>
-						<img
-							src='https://i.dummyjson.com/data/products/2/thumbnail.jpg'
-							alt='Iphone'
-							className='aspect-video w-full'
+					{cart.map((product) => (
+						<CartItem
+							key={product.id}
+							addToCart={() => addToCart(product)}
+							{...product}
 						/>
-						<div>
-							<strong>Iphone</strong> - $1499
-						</div>
-
-						<footer className='flex gap-2 justify-center items-center'>
-							<small>Qty: 1</small>
-							<button className='p-2'>+</button>
-						</footer>
-					</li>
+					))}
 				</ul>
-				<button>
+
+				<button onClick={clearCart}>
 					<ClearCartIcon />
 				</button>
 			</aside>
